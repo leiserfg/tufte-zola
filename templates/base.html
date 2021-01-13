@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+  {% if page.title %}
+      <meta name="twitter:title" content="{{ page.title }}">
+      <title>{{ page.title }}</title>
+    {% else %}
+      <meta name="twitter:title" content="{{ config.title }}">
+      <title>{{ config.title }}</title>
+    {% endif %}
+
+{% block styles%}
+  <link rel="stylesheet" href="{{ get_url(path="latex.css") | safe }}">
+  <link rel="stylesheet" href="{{ get_url(path="tufte.css") | safe }}">
+  <link rel="stylesheet" href="{{ get_url(path="style.css") | safe }}">
+{% endblock styles %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+   {% block nav %}
+       {% if config.extra.nav %}
+       <nav>
+            {% for link in config.extra.nav %}
+              <link rel="prerender" href="{{ link.path }}" />
+                  <a href="{{link.path}}">{{link.name}}</a>
+
+            {% endfor %}
+       </nav>
+       {% endif -%}
+  {% endblock content %}
+   {% block content %}{% endblock content %}
+  </body>
+</html>
